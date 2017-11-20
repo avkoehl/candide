@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<title>Voltaire - Candide</title>
+
+	<style>
+		.background {
+			fill: #eee;
+		}
+
+		line {
+			stroke: #fff;
+		}
+		text {
+			font-size: 8px;
+			font-style: italic;
+		}
+
+		text.active {
+			fill: red;
+		}
+		svg {
+			font: 10px sans-serif;
+		}
+		body {
+			margin-left: 50px;
+		}
+		.links line {
+			stroke: #999;
+			stroke-opacity: 0.6;
+		}
+		.nodes circle {
+			stroke: #fff;
+			stroke-width: 1.5px;
+		}
+		h3.it {
+			background-color: #E0E0E0;
+			font-style: italic;
+			font-size: larger;
+			text-shadow: 0px 0px 3px #FFFFFF;
+			border-radius: 4px 4px 4px 4px;
+			-moz-border-radius: 4px 4px 4px 4px;
+			-webkit-border-radius: 4px;
+			padding: 5px 40px 5px;
+			margin-top: 10px;
+			margin-bottom: 5px;
+			margin-left: 0px;
+			cursor: pointer;
+			text-indent: -20px;
+		}
+	</style>
+
+	<script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+</head>
+
+<body>
+
+<!-- Create banner -->
+<br>
+<div style="width: 1000px; height: 250px; margin: 0 auto;">
+<img src="./candide.png" style="width: inherit" />
+</div>
+<br>
+
+
+<h3 class="it">Candide ou l'Optimisme, Voltaire (1759) </h3>
+
+<p>Candide is a French satire written by Voltaire, a French philosopher of the Age of Enlightment. It was first published in France in 1759, and subsequently translated in many languages, with several English editions
+with varying titles, from "Candide: or All for the best" to "Candide: or, Optimism". It follows a young man, Candide, who is living a sheltered life, being mentored by a hard core Leibnizian optimist, Professor Pangloss. The novella describes the evolution of Candide as he witnesses hardships in many places in the world,
+leading him to advocate a deeply practical precept, "we must cultivate our garden", in lieu of the Leibnizian precept, "all is for the best ... in the best of all possible worlds".<p>
+
+<p>We analyze the relationships between the characters of Candide through the book (a simple analysis that will identify co-occurences of the characters in the different chapters)</p>
+
+<br>
+<br>
+
+<h3 class="it">Co-occurence of the characters in Candide</h3>
+
+<br>
+<table BORDER=1 CELLSPACING=5 CELLPADDING=5 width=100%>
+<tr>
+	<td width=65%>
+		<div style="width: 600px; height: 600px;" id="matrix"></div>
+		<p id="demo"></p>
+		<p id="demo2"></p>
+		<script jsonfile="./candide.json" src="./cooccurence.js"></script>
+	</td>
+	<td align="left" width=35%>
+		<p>This matrix shows the network of co-occurences of characters in Candide by Voltaire.</p>
+		<p>ach colored cell represents two characters that appeared in the same chapter; darker cells indicate characters that co-occurred more frequently.</p>
+		<p>Use the drop-down menu to reorder the matrix and explore the data.
+
+		<p>Order: <select id="order">
+			<option value="name">by Name</option>
+			<option value="count">by Frequency</option>
+			<option value="group">by Cluster</option>
+		</select>
+		</p>
+	</td>
+</tr>
+</table>
+
+<br>
+<br>
+
+<h3 class="it">Network of interactions for the characters in Candide</h3>
+
+<br>
+<table BORDER=1 CELLSPACING=5 CELLPADDING=5 width=100%>
+<tr>
+	<td width=65%>
+		<div style="width: 600px; height: 600px;" id="network"></div>
+		<script jsonfile="./candide.json" force="800" src="./forcenetwork.js"></script>
+	</td>
+	<td align="left" width=35%>
+		<p>Network of interactions between the characters in Candide. A link is created between two characters if they appeared together in at least one chapter. The width of the link is related to the number of times this happens.</p>
+		<p> You can pull on any node and see the network deforms.</p>
+
+</tr>
+</table>
+
+<br>
+<br>
+
+<h3 class="it">Resources needed to generate this page </h3>
+
+<ol>
+<li>Python script that reads in a book (in text format), a character list, and generate the Json file for character co-occurences: <a href="./character_network.py">character_network.py</a>
+<br>
+Note that this script requires the following modules:
+<ul>
+<li> Regular expression module                      : <b>re</b> (should come by default) </li>
+<li> Unicode decoder (for accents)                  : <b>unidecode</b> (install with: <i>pip install unidecode</i>) </li>
+<li> Generate json files                            : <b>json</b> (install with: <i>pip install json </i>) </li>
+<li> Networkx (for manipulating networks)            : <b>networkx</b> (install with <i>pip install networkx</i>) </li>
+<li> community (for detecting communities in network): <b>community</b> (install with <i>pip install python-louvain</i>) </li>
+<li> Module for smart iterators                      : <b>itertools</b> (should come by default) </li>
+</ul>
+</li>
+<li>Json file for Voltaire's Candide                     : <a href="./candide.json">candide.json</a>
+</li>   
+<li>Text file for Voltaire's Candide                     : <a href="./candide.txt">candide.txt</a>
+<li>Characters in Voltaire's Candide                     : <a href="./characters.txt">characters.txt</a>
+</li>   
+<li>Javascript file for visualizing co-occurence matrix  : <a href="./cooccurence.js">cooccurence.js</a></li>
+<li>Javascript file for visualizing network (force-based): <a href="./cooccurence.js">forcenetwork.js</a></li>
+</ol>
+
+<br>
+<br>
+
+
+</body>
+</html>
+
